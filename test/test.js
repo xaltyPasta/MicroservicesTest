@@ -1,19 +1,17 @@
 const autocannon = require('autocannon');
 
-function startBench() {
-  const url = 'http://localhost:3000';
+const url = 'http://localhost:3000';
+const duration = 30;
 
-  const instance = autocannon({
-    url,
-    connections: 10, // Number of concurrent connections
-    duration: 30,    // Duration of the test in seconds
-  });
+const instance = autocannon({
+  url,
+  duration
+}, (err, result) => {
+  if (err) {
+    console.error('Error:', err);
+  } else {
+    console.log('Result:', result);
+  }
+})
 
-  autocannon.track(instance, { renderProgressBar: true });
-
-  instance.on('done', () => {
-    console.log('Benchmark finished');
-  });
-}
-
-startBench();
+autocannon.track(instance);
