@@ -10,8 +10,15 @@ const instance = autocannon({
   if (err) {
     console.error('Error:', err);
   } else {
-    console.log('Result:', result);
+    // Extracting the required details
+    const { duration, requests } = result;
+    console.log('Performance Results:');
+    console.table([
+      { Metric: 'Duration (seconds)', Value: duration },
+      { Metric: 'Number of Requests', Value: requests.total }
+    ]);
   }
-})
+});
 
+// Tracks the instance (optional for additional info during the run)
 autocannon.track(instance);
