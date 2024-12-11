@@ -10,13 +10,9 @@ const instance = autocannon({
   if (err) {
     console.error('Error:', err);
   } else {
-    // Extracting the required details
-    const { duration, requests } = result;
-    console.log('Performance Results:');
-    console.table([
-      { Metric: 'Duration (seconds)', Value: duration },
-      { Metric: 'Number of Requests', Value: requests.total }
-    ]);
+    // Output the number of requests and duration
+    console.log(`Duration: ${result.duration} seconds`);
+    console.log(`Number of Requests: ${result.requests.total}`);
   }
 });
 
